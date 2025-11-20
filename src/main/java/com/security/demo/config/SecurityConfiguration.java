@@ -7,7 +7,7 @@ import com.security.demo.model.RoleEnum;
 import com.security.demo.model.UserEntity;
 import com.security.demo.repository.RoleRepository;
 import com.security.demo.repository.UserRepository;
-import com.security.demo.secutiry.filter.JwtTokenFilter;
+import com.security.demo.security.filter.JwtTokenFilter;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;

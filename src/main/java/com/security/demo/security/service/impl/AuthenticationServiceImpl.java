@@ -1,9 +1,9 @@
-package com.security.demo.secutiry.service.impl;
+package com.security.demo.security.service.impl;
 
 import com.security.demo.model.http.LoginRequest;
 import com.security.demo.model.http.LoginResponse;
-import com.security.demo.secutiry.JwtManagerComponent;
-import com.security.demo.secutiry.service.AuthenticationService;
+import com.security.demo.security.JwtManagerComponent;
+import com.security.demo.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

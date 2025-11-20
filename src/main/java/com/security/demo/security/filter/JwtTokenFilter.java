@@ -1,9 +1,9 @@
-package com.security.demo.secutiry.filter;
+package com.security.demo.security.filter;
 
 import static java.util.Objects.nonNull;
 
-import com.security.demo.secutiry.JwtManagerComponent;
-import com.security.demo.secutiry.service.impl.UserDetailsServiceImpl;
+import com.security.demo.security.JwtManagerComponent;
+import com.security.demo.security.service.impl.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

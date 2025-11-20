@@ -1,8 +1,8 @@
-package com.security.demo.secutiry.service.impl;
+package com.security.demo.security.service.impl;
 
 import com.security.demo.model.UserEntity;
 import com.security.demo.repository.UserRepository;
-import com.security.demo.secutiry.model.AuthorizedUserDetails;
+import com.security.demo.security.model.AuthorizedUserDetails;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

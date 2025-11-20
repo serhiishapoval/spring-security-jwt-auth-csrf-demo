@@ -1,13 +1,10 @@
-package com.security.demo.secutiry.model;
+package com.security.demo.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.security.demo.model.UserEntity;
 import java.util.Collection;
-import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Data

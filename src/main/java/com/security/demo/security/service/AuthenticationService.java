@@ -1,4 +1,4 @@
-package com.security.demo.secutiry.service;
+package com.security.demo.security.service;
 
 import com.security.demo.model.http.LoginRequest;
 import com.security.demo.model.http.LoginResponse;

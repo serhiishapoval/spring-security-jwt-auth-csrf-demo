@@ -2,7 +2,7 @@ package com.security.demo.controller;
 
 import com.security.demo.model.http.LoginRequest;
 import com.security.demo.model.http.LoginResponse;
-import com.security.demo.secutiry.service.AuthenticationService;
+import com.security.demo.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

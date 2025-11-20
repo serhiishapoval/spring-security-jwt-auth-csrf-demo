@@ -1,4 +1,4 @@
-package com.security.demo.secutiry.service.impl;
+package com.security.demo.security.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
