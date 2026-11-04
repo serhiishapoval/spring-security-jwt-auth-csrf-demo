@@ -35,12 +35,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
               new UsernamePasswordAuthenticationToken(
                   loginRequest.getUsername(), loginRequest.getPassword()));
     } catch (final AuthenticationException exception) {
-      return LoginResponse.builder()
-          .success(false)
-          .message(LOGIN_FAILED_MESSAGE)
-          .build();
+      return LoginResponse.builder().success(false).message(LOGIN_FAILED_MESSAGE).build();
     }
-    
+
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
     final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -49,9 +46,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         .success(true)
         .message(LOGIN_SUCCESS_MESSAGE)
         .username(userDetails.getUsername())
-        .roles(userDetails.getAuthorities().stream()
-            .map(GrantedAuthority::getAuthority)
-            .toList())
+        .roles(userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
         .jwtToken(this.jwtManagerComponent.generateTokenFromUsername(userDetails))
         .build();
   }

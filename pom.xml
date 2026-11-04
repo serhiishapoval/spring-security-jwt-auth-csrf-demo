@@ -16,7 +16,11 @@
   <description>spring-security-jwt-auth-csrf-demo</description>
 
   <properties>
-    <java.version>21</java.version>
+    <java.version>27</java.version>
+    <!-- Spring Boot's repackage plugin cannot read Java 27 class files (major 71) -->
+    <maven.compiler.release>25</maven.compiler.release>
+    <!-- Lombok 1.18.48 is required for JDK 26/27 (earlier versions fail with TypeTag :: UNKNOWN) -->
+    <lombok.version>1.18.48</lombok.version>
   </properties>
   <dependencies>
     <dependency>

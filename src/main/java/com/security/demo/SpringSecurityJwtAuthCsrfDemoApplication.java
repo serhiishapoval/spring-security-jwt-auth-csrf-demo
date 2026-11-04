@@ -9,5 +9,4 @@ public class SpringSecurityJwtAuthCsrfDemoApplication {
   public static void main(String[] args) {
     SpringApplication.run(SpringSecurityJwtAuthCsrfDemoApplication.class, args);
   }
-
 }

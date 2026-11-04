@@ -53,23 +53,22 @@ public class SecurityConfiguration {
     http.addFilterBefore(this.jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     http.exceptionHandling(
         exception -> exception.authenticationEntryPoint(this.authenticationEntryPoint));
-    http.authorizeHttpRequests(
-        (requests) ->
-            requests
-                .requestMatchers("/private/**")
-                .authenticated()
-                .requestMatchers("/public/**")
-                .permitAll()
-                .requestMatchers("/login")
-                .permitAll()
-                /*
-                .requestMatchers("/csrf-token")
-                .permitAll()
-                 */
-                .requestMatchers("/restricted/**")
-                .denyAll()
-                .anyRequest()
-                .authenticated());
+    http.authorizeHttpRequests(requests ->
+        requests
+            .requestMatchers("/private/**")
+            .authenticated()
+            .requestMatchers("/public/**")
+            .permitAll()
+            .requestMatchers("/login")
+            .permitAll()
+            /*
+            .requestMatchers("/csrf-token")
+            .permitAll()
+             */
+            .requestMatchers("/restricted/**")
+            .denyAll()
+            .anyRequest()
+            .authenticated());
     /*
     SessionCreationPolicy.STATELESS - Spring Security will not create or use HTTP sessions (HttpSession)
     1. No JSESSIONID cookie - Spring won't create session cookies

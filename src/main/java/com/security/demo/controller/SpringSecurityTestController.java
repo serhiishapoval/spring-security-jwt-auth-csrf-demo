@@ -30,7 +30,8 @@ public class SpringSecurityTestController {
     return "User details endpoint";
   }
 
-  //If you are using CSRF protection, ensure that your PUT request includes X-XSRF-TOKEN as a header
+  // If you are using CSRF protection, ensure that your PUT request includes X-XSRF-TOKEN as a
+  // header
   @PreAuthorize("hasRole('USER')")
   @PutMapping("/user/details")
   public String updateUserDetails() {
