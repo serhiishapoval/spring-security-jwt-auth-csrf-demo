@@ -16,6 +16,7 @@ The project is a learning demo. It has hard-coded secrets and default passwords,
 - [Endpoints and access rules](#endpoints-and-access-rules)
 - [Configuration](#configuration)
 - [Running locally](#running-locally)
+- [Running the tests](#running-the-tests)
 - [Trying it out](#trying-it-out)
 - [Build notes](#build-notes)
 - [Known limitations](#known-limitations)
@@ -76,6 +77,7 @@ spring-security-jwt-auth-csrf-demo/
 - JJWT 0.13.0 (`jjwt-api`, `jjwt-impl`, `jjwt-jackson`)
 - MySQL Connector/J 8.0.33 and MySQL 8 as the database
 - Lombok 1.18.48
+- JUnit 6.1.3 and Mockito 5.24.0 for unit tests (pinned in `pom.xml`)
 - Maven
 
 ---
@@ -171,6 +173,23 @@ The application starts on http://localhost:8080. Tables and seed users are creat
 
 ---
 
+## Running the tests
+
+```bash
+mvn test
+```
+
+The 24 unit tests live in `src/test/java`. They need no MySQL database and no running server. They cover:
+
+- `JwtManagerComponent`: reading the Bearer header, creating and parsing tokens, and rejecting malformed, empty and expired tokens.
+- `JwtTokenFilter`: setting the security context for a valid token, and continuing the chain for missing, invalid or failing tokens.
+- `AuthenticationServiceImpl`, `UserDetailsServiceImpl`, `JwtAuthenticationEntryPoint` and `AuthenticationController`.
+- The seed-data runner in `SecurityConfiguration`.
+
+The tests do not check the HTTP access rules in the endpoint table, and they do not touch MySQL. Those need `MockMvc` or `@SpringBootTest` tests, which the project does not have yet.
+
+---
+
 ## Trying it out
 
 1. **Log in** as the `user` account:
@@ -215,7 +234,8 @@ The application starts on http://localhost:8080. Tables and seed users are creat
 - `java.version` is 27. The compiler targets `maven.compiler.release` **25**. Spring Boot's repackage plugin cannot read Java 27 class files (major version 71), so the build must target 25.
 - Lombok is pinned to **1.18.48** with the `lombok.version` property. Earlier versions fail on JDK 26/27 with a `TypeTag :: UNKNOWN` error.
 - Sources follow google-java-format style.
-- There are no tests yet. `spring-boot-starter-test` and `spring-security-test` are on the test classpath.
+- Unit tests (`mvn test`) use JUnit 6 and Mockito 5, pinned in `pom.xml`. `byte-buddy.version` is pinned to 1.18.17 so that Mockito can mock interfaces on Java 27.
+- `spring-security-test` is on the test classpath but not used yet.
 
 ---
 
@@ -249,6 +269,7 @@ This is a demo. The following are known gaps.
 **Tokens**
 
 - There is no token revocation, refresh token or logout. A token stays valid until it expires, one hour after issue by default.
+- `validateJwtToken` does not catch `SignatureException`, so a token signed with another key makes the method throw instead of returning `false`. `JwtTokenFilter` catches the exception, logs it as an error and continues, so the request is treated as anonymous. The unit test `JwtManagerComponentTest` documents this behaviour.
 - The token contains no roles. Roles are read from the database on each request, which keeps role changes immediate but adds a database query per request.
 
 **Other**
@@ -256,4 +277,4 @@ This is a demo. The following are known gaps.
 - `POST /login` returns HTTP `200` for bad credentials, with `success: false`. A `401` would be more conventional.
 - `AuthenticationServiceImpl` writes the authentication into `SecurityContextHolder`, which has no effect in a stateless application.
 - The `mysql-connector-java` coordinate is the legacy name. The current artifact is `com.mysql:mysql-connector-j`.
-- No tests.
+- Only unit tests exist. No test covers the HTTP access rules, the MySQL persistence, or the full login-and-call flow.
